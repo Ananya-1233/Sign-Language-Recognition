@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNMUTE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            font-size: 36px;
+            padding: 20px 0;
+            animation: bounceAndColorChange 5s ease infinite;
+        }
+
+        @keyframes bounceAndColorChange {
+            0% {
+                transform: translateY(0);
+                color: #007bff;
+            }
+            50% {
+                transform: translateY(-10px);
+                color: #ff5733;
+            }
+            100% {
+                transform: translateY(0);
+                color: #ffdb33;
+            }
+        }
+
+        .container {
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #video-container {
+            flex: 1;
+            background-color: #ffffff;
+            overflow: hidden;
+            position:relative;
+        }
+
+        #random-text-container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            transform: scaleX(-1);
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>UNMUTE-talking hands</h1>
+    <div class="container">
+        <!-- <div id="video-container">
+            <video id="live-camera" autoplay></video>
+        </div> -->
+        <div>
+    <form method="POST" action = "{% url 'process_video' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- <video id="videoElement" autoplay></video> -->
+        {{ form.as_p }}
+        <!-- <input type = "file" id = "videoElement">    -->
+        <!-- <button type="button" id="startButton">Start Capture</button> -->
+        <input type="submit" value="Process Video">
+        </div>
+    </form>
+    <div>
+        <img id="video-stream" src="" data-stream-url = "{% url 'process_video' %}" style="max-width: 100%;"></img>
+
+        <script>
+            const videoEl = document.getElementById('video-stream');
+    
+            const streamUrl = videoEl.getAttribute('data-stream-url');
+            // Function to update the video stream
+            function updateVideoStream() {
+            fetch(streamUrl, { method: 'GET', cache: 'no-store' })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const objectURL = URL.createObjectURL(blob);
+                    videoElement.src = objectURL;
+                })
+                .catch(error => {
+                    console.error('Error fetching video frame:', error);
+                });
+        }
+
+        // Call the updateVideoStream function to start the streaming
+        updateVideoStream();
+        </script>
+        
+    </div>
+    </div>
+
+    <script>
+        const videoElement = document.getElementById('videoElement');
+        const startCameraButton = document.getElementById('startButton');
+        const randomTextElement = document.getElementById('random-text');
+        const submitButton = document.getElementById('submit-button');
+
+        // Use a fake random text generator for this example.
+        function generateRandomText() {
+            const randomTexts = ["Hello, World!", "This is a sample text.", "Random text here."];
+            const randomIndex = Math.floor(Math.random() * randomTexts.length);
+            return randomTexts[randomIndex];
+        }
+
+        startCameraButton.addEventListener('click', () => {
+            // You should replace this with actual camera access code.
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    videoElement.srcObject = stream;
+                })
+                .catch(error => console.error("Error accessing camera: " + error));
+        });
+
+        submitButton.addEventListener('click', () => {
+            randomTextElement.textContent = generateRandomText();
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!-- 
+action="{% url 'process_video' %}"  -->
