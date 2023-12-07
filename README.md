@@ -11,7 +11,7 @@ Each gloss has nearly 7000 videos of about 2-3 seconds. The labels, i.e., glosse
 The dataset is extracted from Kaggle and is of 5 GB.
 
 
-#Methodology
+# Methodology
 
 3D CNNs are used to extract features from videos which are first divided into frames using opencv.
 
