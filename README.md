@@ -1,14 +1,13 @@
-## Sign language recognition using CNN
+# Sign language recognition using CNN
 
 # Dataset
 
 Word level American Sign Langauge dataset is a public dataset that contains 2000 glosses from the English language. The glosses are words such as how, where, which etc. 
+The advantage of using words as glosses is that signs can directly be converted into words, not needing the user to spell each word alphabetically. This saves time and improves the efficiency of the model. On the other hand, time and space requirements are increased, making the process of training tedious and heavy. 
+For each word in the dataset, nearly 7 videos of about 2-3 seconds exist. The labels, i.e., glosses are marked using json file. Duration of the video, label, number of frames etc., are some of the features mentioned in the json file. It also contains frames to which the glosses belong and bounding boxes to represent the location of where the sign was generated in the video.
 
-The advantage of using words as glosses is that signs can directly be converted into words. It does not need the user to spell each word alphabetically. 
-
-Each gloss has nearly 7000 videos of about 2-3 seconds. The labels, i.e., glosses are marked using json file which maps the videos with the glosses. Additionally, the json file also contains frames to which the glosses belong and bounding boxes to represent the location of where the sign was generated in the video.
-
-The dataset is extracted from Kaggle and is of 5 GB.
+Source: Kaggle
+Size: 5 GB
 
 
 # Methodology
