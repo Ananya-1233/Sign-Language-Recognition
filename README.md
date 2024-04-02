@@ -17,13 +17,9 @@ The model contains two Conv3D layers with 32 and 64 filters each of size (2,2) w
 
 Loss: Categorical cross entropy\
 Optimizer: Adam\
-Metric: Accuracy\
+Metric: Accuracy
 
-An accuracy of 70% was achieved. 
+An accuracy of 70% was achieved using 3D-CNN. 
 
 Making use of django and opencv, the output of each sign is displayed along with the input video on an interactive UI. The user can start live camera feed by clicking a button and start gesturing in front of the camera. The model provides outputs without latency.\
-Using Seq2Seq translation technique, words in the form of glosses are translated into sentences.
-
-The generated sentences are stored in a text file which is downloadable using UI.
-
-Django is used for backend. Whereas, HTML and CSS cover the frontend. 
+Using Seq2Seq translation technique, words in the form of glosses are translated into sentences. Though it achieves an accuracy of 65%, the model takes a lot of time to predict the sentences, thereby introducing lag into the system. Thus, this part was omitted in the final UI. (The generated sentences are stored in a text file which is downloadable using UI.)
